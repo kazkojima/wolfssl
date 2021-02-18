@@ -22,7 +22,7 @@ if [ ! -d $ZEPHR_DIR ]; then
     echo "Zephyr project directory does not exist: $ZEPHYR_DIR"
     exit 1
 fi
-ZEPHYR_CRYPTO_DIR=$ZEPHYR_DIR/zephyr/ext/lib/crypto
+ZEPHYR_CRYPTO_DIR=$ZEPHYR_DIR/modules/crypto
 if [ ! -d $ZEPHYR_CRYPTO_DIR ]; then
     echo "Zephyr crypto directory does not exist: $ZEPHYR_CRYPTO_DIR"
     exit 1
@@ -35,8 +35,14 @@ rm -rf $ZEPHYR_WOLFSSL_DIR
 mkdir $ZEPHYR_WOLFSSL_DIR
 
 echo "Copy in Build files ..."
-cp -r * $ZEPHYR_WOLFSSL_DIR/
-rm $ZEPHYR_WOLFSSL_DIR/$0
+cp CMakeLists.txt $ZEPHYR_WOLFSSL_DIR/
+cp Kconfig $ZEPHYR_DIR/zephyr/modules/Kconfig.wolfssl
+cp Kconfig.tls-generic $ZEPHYR_DIR/zephyr/modules/Kconfig.wolfssl-tls-generic
+cp README user_settings.h zephyr_init.c $ZEPHYR_WOLFSSL_DIR/
+mkdir $ZEPHYR_WOLFSSL_DIR/settings
+cp settings/* $ZEPHYR_WOLFSSL_DIR/settings/
+mkdir $ZEPHYR_WOLFSSL_DIR/zephyr
+cp module.yml $ZEPHYR_WOLFSSL_DIR/zephyr/
 
 echo "Copy Source Code ..."
 rm -rf $ZEPHYR_WOLFSSL_DIR/library

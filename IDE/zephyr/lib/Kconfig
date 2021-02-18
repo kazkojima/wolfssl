@@ -53,7 +53,7 @@ config WOLFSSL_SETTINGS_FILE
 	  alternative config.
 
 if WOLFSSL_BUILTIN && WOLFSSL_SETTINGS_FILE = "user_settings-tls-generic.h"
-source "ext/lib/crypto/wolfssl/Kconfig.tls-generic"
+rsource "Kconfig.wolfssl-tls-generic"
 endif
 
 config WOLFSSL_DEBUG

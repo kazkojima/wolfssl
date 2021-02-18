@@ -462,7 +462,7 @@ int main()
         ret = wolfssl_client_connect(client_ssl);
         if (ret == 0 && wolfSSL_is_init_finished(client_ssl))
             break;
-        k_sleep(10);
+        k_sleep(K_MSEC(10));
     }
 
     if (ret == 0) {
@@ -473,7 +473,7 @@ int main()
     }
     /* Receive HTTP response */
     while (ret == 0) {
-        k_sleep(10);
+        k_sleep(K_MSEC(10));
         ret = wolfssl_recv(client_ssl);
     }
     if (ret == 1)

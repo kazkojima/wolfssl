@@ -360,7 +360,7 @@ void server_thread(void* arg1, void* arg2, void* arg3)
         ret = wolfssl_server_accept_tcp(server_ssl, &sockfd, &clientfd);
 
     while (ret == 0) {
-        k_sleep(100);
+        k_sleep(K_MSEC(100));
         ret = wolfssl_server_accept(server_ssl);
         if (ret == 0 && wolfSSL_is_init_finished(server_ssl))
             break;
@@ -453,7 +453,7 @@ void client_thread()
         ret = wolfssl_client_connect_tcp(client_ssl, &sockfd);
 
     while (ret == 0) {
-        k_sleep(10);
+        k_sleep(K_MSEC(10));
         ret = wolfssl_client_connect(client_ssl);
         if (ret == 0 && wolfSSL_is_init_finished(client_ssl))
             break;
@@ -467,7 +467,7 @@ void client_thread()
     }
     /* Receive HTTP response */
     while (ret == 0) {
-        k_sleep(10);
+        k_sleep(K_MSEC(10));
         ret = wolfssl_recv(client_ssl);
     }
     if (ret == 1)
@@ -494,7 +494,7 @@ int main()
     /* Start server */
     start_thread(server_thread, NULL, &serverThread);
 
-    k_sleep(100);
+    k_sleep(K_MSEC(100));
     client_thread();
 
     join_thread(serverThread);

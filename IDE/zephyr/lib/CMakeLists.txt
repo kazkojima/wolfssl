@@ -1,3 +1,4 @@
+if(CONFIG_WOLFSSL)
 zephyr_interface_library_named(wolfSSL)
 
 if(CONFIG_WOLFSSL_BUILTIN)
@@ -27,7 +28,7 @@ if(CONFIG_WOLFSSL_BUILTIN)
   zephyr_library_sources(library/wolfcrypt/src/arc4.c)
   zephyr_library_sources(library/wolfcrypt/src/asm.c)
   zephyr_library_sources(library/wolfcrypt/src/asn.c)
-  zephyr_library_sources(library/wolfcrypt/src/async.c)
+  #zephyr_library_sources(library/wolfcrypt/src/async.c)
   zephyr_library_sources(library/wolfcrypt/src/blake2b.c)
   zephyr_library_sources(library/wolfcrypt/src/camellia.c)
   zephyr_library_sources(library/wolfcrypt/src/chacha20_poly1305.c)
@@ -120,3 +121,5 @@ else()
 endif()
 
 target_link_libraries(wolfSSL INTERFACE zephyr_interface)
+
+endif()
